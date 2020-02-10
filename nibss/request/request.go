@@ -22,7 +22,7 @@ type Option func(*RequestClient)
 
 const (
 	defaultMethod  = http.MethodGet
-	defaultBaseURL = ""
+	defaultBaseURL = "https://sandboxapi.fsi.ng"
 )
 
 var (
@@ -139,6 +139,10 @@ func (r RequestClient) Make(responseFunc func(*http.Response) error) (*http.Resp
 	}
 
 	res, err := httpClient.Do(req)
+
+	if err != nil {
+		return nil, err
+	}
 
 	if responseFunc != nil {
 		err = responseFunc(res)

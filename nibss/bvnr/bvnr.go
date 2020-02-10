@@ -12,30 +12,17 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/nibss/request"
 )
 
-type NibssCredentials struct {
-	SandboxKey       string
-	OrganisationCode string
-}
+func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCredentials, error) {
+	var resetCredentials nibss.ResetCredentials
 
-type ResetCredentials struct {
-	AESKey   string `json:"Aes_key"`
-	Code     string `json:"Code"`
-	Email    string `json:"Email"`
-	IVKey    string `json:"Ivkey"`
-	Name     string `json:"Name"`
-	Password string `json:"Password"`
-}
-
-func Reset(c NibssCredentials) (ResetCredentials, error) {
-	var resetCredentials ResetCredentials
-
-	req, err := req.New(
+	option := append([]req.Option{
 		req.WithMethod("POST"),
 		req.WithPath("nibss/bvnr/Reset"),
 		req.WithHeader("Sandbox-Key", c.SandboxKey),
 		req.WithHeader("OrganisationCode", nibss.Encode(c.OrganisationCode)),
 		req.WithBody([]byte("")),
-	)
+	}, overrideOpts...)
+	req, err := req.New(option...)
 
 	if err != nil {
 		return resetCredentials, err
@@ -70,7 +57,7 @@ func Reset(c NibssCredentials) (ResetCredentials, error) {
 	return resetCredentials, err
 }
 
-func VerifySingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, error) {
+func VerifySingleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
 	encryptedData, err := cr.Encrypt(data)
@@ -82,8 +69,7 @@ func VerifySingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, e
 	authorization := nibss.Encode(fmt.Sprintf("%s:%s", cr.Code, cr.Password))
 	today := time.Now().Format("20060102") /*YYYYMMDD format*/
 	signature := nibss.Sha256(fmt.Sprintf("%s%s%s", cr.Code, today, cr.Password))
-
-	req, err := req.New(
+	option := append([]req.Option{
 		req.WithMethod("POST"),
 		req.WithPath("nibss/bvnr/VerifySingleBVN"),
 		req.WithDefaultHeaders(),
@@ -92,7 +78,8 @@ func VerifySingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, e
 		req.WithHeader("Authorization", authorization),
 		req.WithHeader("SIGNATURE", signature),
 		req.WithBody([]byte(hex.EncodeToString(encryptedData))),
-	)
+	}, overrideOpts...)
+	req, err := req.New(option...)
 
 	if err != nil {
 		return responseString, err
@@ -114,7 +101,7 @@ func VerifySingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, e
 	return responseString, err
 }
 
-func VerifyMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, error) {
+func VerifyMultipleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
 	encryptedData, err := cr.Encrypt(data)
@@ -126,8 +113,7 @@ func VerifyMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string,
 	authorization := nibss.Encode(fmt.Sprintf("%s:%s", cr.Code, cr.Password))
 	today := time.Now().Format("20060102") /*YYYYMMDD format*/
 	signature := nibss.Sha256(fmt.Sprintf("%s%s%s", cr.Code, today, cr.Password))
-
-	req, err := req.New(
+	option := append([]req.Option{
 		req.WithMethod("POST"),
 		req.WithPath("nibss/bvnr/VerifyMultipleBVN"),
 		req.WithDefaultHeaders(),
@@ -136,7 +122,8 @@ func VerifyMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string,
 		req.WithHeader("Authorization", authorization),
 		req.WithHeader("SIGNATURE", signature),
 		req.WithBody([]byte(hex.EncodeToString(encryptedData))),
-	)
+	}, overrideOpts...)
+	req, err := req.New(option...)
 
 	if err != nil {
 		return responseString, err
@@ -158,7 +145,7 @@ func VerifyMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string,
 	return responseString, err
 }
 
-func GetSingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, error) {
+func GetSingleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
 	encryptedData, err := cr.Encrypt(data)
@@ -170,8 +157,7 @@ func GetSingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, erro
 	authorization := nibss.Encode(fmt.Sprintf("%s:%s", cr.Code, cr.Password))
 	today := time.Now().Format("20060102") /*YYYYMMDD format*/
 	signature := nibss.Sha256(fmt.Sprintf("%s%s%s", cr.Code, today, cr.Password))
-
-	req, err := req.New(
+	option := append([]req.Option{
 		req.WithMethod("POST"),
 		req.WithPath("nibss/bvnr/GetSingleBVN"),
 		req.WithDefaultHeaders(),
@@ -180,7 +166,8 @@ func GetSingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, erro
 		req.WithHeader("Authorization", authorization),
 		req.WithHeader("SIGNATURE", signature),
 		req.WithBody([]byte(hex.EncodeToString(encryptedData))),
-	)
+	}, overrideOpts...)
+	req, err := req.New(option...)
 
 	if err != nil {
 		return responseString, err
@@ -202,7 +189,7 @@ func GetSingleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, erro
 	return responseString, err
 }
 
-func GetMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, error) {
+func GetMultipleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
 	encryptedData, err := cr.Encrypt(data)
@@ -214,8 +201,7 @@ func GetMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, er
 	authorization := nibss.Encode(fmt.Sprintf("%s:%s", cr.Code, cr.Password))
 	today := time.Now().Format("20060102") /*YYYYMMDD format*/
 	signature := nibss.Sha256(fmt.Sprintf("%s%s%s", cr.Code, today, cr.Password))
-
-	req, err := req.New(
+	option := append([]req.Option{
 		req.WithMethod("POST"),
 		req.WithPath("nibss/bvnr/GetMultipleBVN"),
 		req.WithDefaultHeaders(),
@@ -224,7 +210,8 @@ func GetMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, er
 		req.WithHeader("Authorization", authorization),
 		req.WithHeader("SIGNATURE", signature),
 		req.WithBody([]byte(hex.EncodeToString(encryptedData))),
-	)
+	}, overrideOpts...)
+	req, err := req.New(option...)
 
 	if err != nil {
 		return responseString, err
@@ -246,7 +233,7 @@ func GetMultipleBVN(c NibssCredentials, cr nibss.Crypt, data []byte) (string, er
 	return responseString, err
 }
 
-func IsBVNWatchlisted(c NibssCredentials, cr nibss.Crypt, data []byte) (string, error) {
+func IsBVNWatchlisted(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
 	encryptedData, err := cr.Encrypt(data)
@@ -258,8 +245,7 @@ func IsBVNWatchlisted(c NibssCredentials, cr nibss.Crypt, data []byte) (string, 
 	authorization := nibss.Encode(fmt.Sprintf("%s:%s", cr.Code, cr.Password))
 	today := time.Now().Format("20060102") /*YYYYMMDD format*/
 	signature := nibss.Sha256(fmt.Sprintf("%s%s%s", cr.Code, today, cr.Password))
-
-	req, err := req.New(
+	option := append([]req.Option{
 		req.WithMethod("POST"),
 		req.WithPath("nibss/bvnr/IsBVNWatchlisted"),
 		req.WithDefaultHeaders(),
@@ -268,7 +254,8 @@ func IsBVNWatchlisted(c NibssCredentials, cr nibss.Crypt, data []byte) (string, 
 		req.WithHeader("Authorization", authorization),
 		req.WithHeader("SIGNATURE", signature),
 		req.WithBody([]byte(hex.EncodeToString(encryptedData))),
-	)
+	}, overrideOpts...)
+	req, err := req.New(option...)
 
 	if err != nil {
 		return responseString, err
