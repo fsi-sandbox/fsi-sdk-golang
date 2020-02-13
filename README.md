@@ -2,6 +2,6 @@
 
 ### Installation
 
-```go
+```bash
 $ go get github.com/enyata/innovation-sandbox-go
 ```
