@@ -1,4 +1,4 @@
-// Package bvnr implements access to nibss.BVNPlaceHolder sandbox.
+// Package placeholder implements access to nibss.BVNPlaceHolder sandbox.
 package placeholder
 
 import (

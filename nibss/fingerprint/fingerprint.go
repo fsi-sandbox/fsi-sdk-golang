@@ -1,4 +1,4 @@
-// Package bvnr implements access to nibss.fp sandbox.
+// Package fingerprint implements access to nibss.fp sandbox.
 package fingerprint
 
 import (
