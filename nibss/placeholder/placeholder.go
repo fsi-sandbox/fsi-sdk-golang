@@ -1,3 +1,4 @@
+// Package bvnr implements access to nibss.BVNPlaceHolder sandbox.
 package placeholder
 
 import (
@@ -12,6 +13,8 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/nibss/request"
 )
 
+// Reset sends an HTTP request to nibss.BVNPlaceHolder.Reset sandbox API.
+// It returns nibss.ResetCredentials and any error encountered.
 func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCredentials, error) {
 	var resetCredentials nibss.ResetCredentials
 
@@ -57,6 +60,8 @@ func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCre
 	return resetCredentials, err
 }
 
+// ValidateRecord sends an HTTP request to nibss.BVNPlaceHolder.ValidateRecord sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func ValidateRecord(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -101,6 +106,8 @@ func ValidateRecord(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overr
 	return responseString, err
 }
 
+// ValidateRecords sends an HTTP request to nibss.BVNPlaceHolder.ValidateRecords sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func ValidateRecords(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

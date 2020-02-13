@@ -1,3 +1,4 @@
+// Package bvnr implements access to nibss.bvnr sandbox.
 package bvnr
 
 import (
@@ -12,6 +13,8 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/nibss/request"
 )
 
+// Reset sends an HTTP request to nibss.bvnr.Reset sandbox API.
+// It returns nibss.ResetCredentials and any error encountered.
 func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCredentials, error) {
 	var resetCredentials nibss.ResetCredentials
 
@@ -57,6 +60,8 @@ func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCre
 	return resetCredentials, err
 }
 
+// VerifySingleBVN sends an HTTP request to nibss.bvnr.VerifySingleBVN sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func VerifySingleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -101,6 +106,8 @@ func VerifySingleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, over
 	return responseString, err
 }
 
+// VerifyMultipleBVN sends an HTTP request to nibss.bvnr.VerifyMultipleBVN sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func VerifyMultipleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -145,6 +152,8 @@ func VerifyMultipleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, ov
 	return responseString, err
 }
 
+// GetSingleBVN sends an HTTP request to nibss.bvnr.GetSingleBVN sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func GetSingleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -189,6 +198,8 @@ func GetSingleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrid
 	return responseString, err
 }
 
+// GetMultipleBVN sends an HTTP request to nibss.bvnr.GetMultipleBVN sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func GetMultipleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -233,6 +244,8 @@ func GetMultipleBVN(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overr
 	return responseString, err
 }
 
+// IsBVNWatchlisted sends an HTTP request to nibss.bvnr.IsBVNWatchlisted sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func IsBVNWatchlisted(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

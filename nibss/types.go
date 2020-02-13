@@ -1,10 +1,12 @@
 package nibss
 
+// NibssCredentials struct required for innovation sandbox access.
 type NibssCredentials struct {
 	SandboxKey       string
 	OrganisationCode string
 }
 
+// ResetCredentials struct from Reset API and required nibss sandbox interactions.
 type ResetCredentials struct {
 	AESKey   string `json:"Aes_key"`
 	Code     string `json:"Code"`

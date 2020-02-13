@@ -1,3 +1,4 @@
+// Package bvnr implements access to nibss.fp sandbox.
 package fingerprint
 
 import (
@@ -12,6 +13,8 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/nibss/request"
 )
 
+// Reset sends an HTTP request to nibss.fp.Reset sandbox API.
+// It returns nibss.ResetCredentials and any error encountered.
 func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCredentials, error) {
 	var resetCredentials nibss.ResetCredentials
 
@@ -57,6 +60,8 @@ func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCre
 	return resetCredentials, err
 }
 
+// VerifyFingerPrint sends an HTTP request to nibss.fp.VerifyFingerPrint sandbox API.
+// It returns a decrypted HTTP response body string and any error encountered.
 func VerifyFingerPrint(c nibss.NibssCredentials, cr nibss.Crypt, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
