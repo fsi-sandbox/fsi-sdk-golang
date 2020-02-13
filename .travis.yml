@@ -7,4 +7,9 @@ env:
   GO111MODULE: "on"
 
 script:
+  - make install_deps
   - make test
+
+cache:
+  directories:
+    - "/go/pkg"

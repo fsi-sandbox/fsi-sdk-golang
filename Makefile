@@ -1,3 +1,6 @@
+install_deps:
+	GO111MODULE=off go get github.com/mgechev/revive
+
 lint:
 	go fmt ./...
 	go vet ./...
