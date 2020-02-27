@@ -104,7 +104,7 @@ func buildRaw(base, path string, queries url.Values) string {
 	q := queries.Encode()
 
 	if q != "" {
-		q = fmt.Sprintf("?q=%s", q)
+		q = fmt.Sprintf("?%s", q)
 	}
 
 	return fmt.Sprintf("%s/%s%s", base, path, q)
@@ -116,7 +116,7 @@ func New(opts ...Option) (RequestClient, error) {
 	r := RequestClient{
 		method:  defaultMethod,
 		base:    defaultBaseURL,
-		body:    nil,
+		body:    bytes.NewBuffer(nil),
 		queries: make(url.Values),
 		headers: make(http.Header),
 	}
