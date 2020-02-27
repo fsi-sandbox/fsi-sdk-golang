@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/enyata/innovation-sandbox-go/nibss"
-	req "github.com/enyata/innovation-sandbox-go/nibss/request"
+	req "github.com/enyata/innovation-sandbox-go/request"
 
 	"github.com/icrowley/fake"
 	"github.com/stretchr/testify/assert"

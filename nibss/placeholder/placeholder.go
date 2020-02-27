@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/enyata/innovation-sandbox-go/nibss"
-	req "github.com/enyata/innovation-sandbox-go/nibss/request"
+	req "github.com/enyata/innovation-sandbox-go/request"
 )
 
 // Reset sends an HTTP request to nibss.BVNPlaceHolder.Reset sandbox API.
@@ -23,7 +23,6 @@ func Reset(c nibss.NibssCredentials, overrideOpts ...req.Option) (nibss.ResetCre
 		req.WithPath("nibss/BVNPlaceHolder/Reset"),
 		req.WithHeader("Sandbox-Key", c.SandboxKey),
 		req.WithHeader("OrganisationCode", nibss.Encode(c.OrganisationCode)),
-		req.WithBody([]byte("")),
 	}, overrideOpts...)
 	req, err := req.New(option...)
 
