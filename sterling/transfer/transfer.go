@@ -1,3 +1,4 @@
+// Package transfer implements access to sterling.Transfer sandbox.
 package transfer
 
 import (
@@ -8,6 +9,8 @@ import (
 	"github.com/enyata/innovation-sandbox-go/sterling"
 )
 
+// InterbankNameEnquiry sends an HTTP request to sterling.Transfer.InterbankNameEnquiry sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func InterbankNameEnquiry(c sterling.SterlingCredentials, queries map[string]string, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

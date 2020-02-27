@@ -1,3 +1,4 @@
+// Package account implements access to sterling.account sandbox.
 package account
 
 import (
@@ -8,6 +9,8 @@ import (
 	"github.com/enyata/innovation-sandbox-go/sterling"
 )
 
+// InterbankTransferReq sends an HTTP request to sterling.accountapi.InterbankTransferReq sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func InterbankTransferReq(c sterling.SterlingCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

@@ -1,7 +1,3 @@
-// Package nibss implements access to nibss sandbox.
-//
-// It futher implements bvnr, fingerprint and BVNPlaceholder sandbox APIs
-// as exported functions.
 package nibss
 
 import (
