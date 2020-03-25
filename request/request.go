@@ -84,6 +84,17 @@ func WithBody(b []byte) Option {
 	}
 }
 
+// WithBody set an HTTP Request Form Body.
+func WithFormBody(data map[string]string) Option {
+	form := url.Values{}
+
+	for k, v := range data {
+		form.Set(k, v)
+	}
+
+	return WithBody([]byte(form.Encode()))
+}
+
 // WithQuery add an HTTP Request URL Query.
 func WithQuery(key, value string) Option {
 	return func(r *RequestClient) {
