@@ -1,3 +1,4 @@
+// Package token implements access to atlabs.token sandbox.
 package token
 
 import (
@@ -8,6 +9,9 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/request"
 )
 
+// CreateCheckoutToken sends an HTTP request to atlabs.token sandbox API to retrieve
+// checkout token.
+// It returns an HTTP response body string and any error encountered.
 func CreateCheckoutToken(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

@@ -1,3 +1,4 @@
+// Package airtime implements access to atlabs.airtime sandbox.
 package airtime
 
 import (
@@ -8,6 +9,8 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/request"
 )
 
+// SendAirtime sends an HTTP request to atlabs.airtime sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func SendAirtime(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

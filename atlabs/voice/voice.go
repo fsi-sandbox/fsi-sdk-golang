@@ -1,3 +1,4 @@
+// Package voice implements access to atlabs.voice sandbox.
 package voice
 
 import (
@@ -8,6 +9,8 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/request"
 )
 
+// VoiceCall sends an HTTP request to atlabs.call sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func VoiceCall(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -39,6 +42,8 @@ func VoiceCall(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Opti
 	return responseString, err
 }
 
+// FetchQueueCalls sends an HTTP request to atlabs.queueStatus sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func FetchQueueCalls(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -70,6 +75,8 @@ func FetchQueueCalls(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...re
 	return responseString, err
 }
 
+// UploadMediaFile sends an HTTP request to atlabs.mediaUpload sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func UploadMediaFile(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 

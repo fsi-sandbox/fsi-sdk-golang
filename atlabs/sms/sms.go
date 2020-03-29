@@ -1,3 +1,4 @@
+// Package sms implements access to atlabs.messaging sandbox.
 package sms
 
 import (
@@ -8,6 +9,8 @@ import (
 	req "github.com/enyata/innovation-sandbox-go/request"
 )
 
+// Message sends an HTTP request to atlabs.messaging sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func Message(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -39,6 +42,8 @@ func Message(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option
 	return responseString, err
 }
 
+// PremiumMessage sends an HTTP request to atlabs.premium sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func PremiumMessage(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -70,6 +75,8 @@ func PremiumMessage(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req
 	return responseString, err
 }
 
+// CreatePremiumSubscription sends an HTTP request to atlabs.subscription sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func CreatePremiumSubscription(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -101,6 +108,8 @@ func CreatePremiumSubscription(c atlabs.AtlabsCredentials, data []byte, override
 	return responseString, err
 }
 
+// DeletePremiumSubscription sends an HTTP request to atlabs.subscription sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func DeletePremiumSubscription(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -132,6 +141,8 @@ func DeletePremiumSubscription(c atlabs.AtlabsCredentials, data []byte, override
 	return responseString, err
 }
 
+// FetchPremiumSubscription sends an HTTP request to atlabs.subscription sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func FetchPremiumSubscription(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
@@ -163,6 +174,8 @@ func FetchPremiumSubscription(c atlabs.AtlabsCredentials, data []byte, overrideO
 	return responseString, err
 }
 
+// FetchMessage sends an HTTP request to atlabs.messaging sandbox API.
+// It returns an HTTP response body string and any error encountered.
 func FetchMessage(c atlabs.AtlabsCredentials, data []byte, overrideOpts ...req.Option) (string, error) {
 	var responseString string
 
