@@ -8,4 +8,5 @@ env:
 
 script:
   - make install_deps
+  - mkdir .cover
   - make test
